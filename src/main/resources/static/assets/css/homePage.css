@@ -65,3 +65,40 @@ footer {
 .table-hover tbody tr:hover {
     background-color: rgba(15, 65, 66, 0.1);
 }
+
+/* Footer Styles */
+.footer {
+    background-color: #0F4142;
+    color: #F7F4E7;
+    padding: 40px 0;
+}
+
+.footer h5 {
+    color: #D96123;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-link {
+    color: #F7F4E7;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #D96123;
+    text-decoration: underline;
+}
+
+.footer-social i {
+    color: #F7F4E7;
+    transition: color 0.3s;
+}
+
+.footer-social i:hover {
+    color: #D96123;
+}
+
+.footer-bottom {
+    background-color: #0D3334;
+    color: #F7F4E7;
+}

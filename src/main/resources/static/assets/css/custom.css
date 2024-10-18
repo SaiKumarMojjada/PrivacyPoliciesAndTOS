@@ -1,31 +1,60 @@
 /* Global Styles */
 body {
-    background-color: #f8f9fa;
+    background-color: #F7F4E7;
     font-family: 'Poppins', sans-serif;
 }
 
 /* Sidebar */
 #sidebar-wrapper {
     width: 250px;
+    background-color: #0F4142;
     transition: margin 0.3s;
 }
 .toggled #sidebar-wrapper {
     margin-left: -250px;
 }
 
-/* Cards */
-.card {
-    border-radius: 15px;
+.list-group-item {
+    background-color: #0F4142;
+    border: none;
 }
-.card .fas {
-    opacity: 0.2;
-    transition: opacity 0.3s;
+.list-group-item a {
+    color: #F7F4E7;
 }
-.card:hover .fas {
-    opacity: 1;
+.list-group-item a:hover {
+    color: #D96123;
 }
 
 /* Navbar */
 .navbar {
+    background-color: #0F4142;
+    color: #F7F4E7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards */
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.card-body i {
+    color: #D96123;
+}
+
+/* Table */
+.table-hover tbody tr:hover {
+    background-color: rgba(15, 65, 66, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #D96123;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #B84E1C;
 }
