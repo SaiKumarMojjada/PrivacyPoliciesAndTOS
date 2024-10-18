@@ -14,15 +14,14 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @Configuration
 public class SecurityConfig {
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/","/home", "/homepage", "/assets/css/**", "/assets/js/**", "/assets/images/**").permitAll()
-                        .requestMatchers("/register").permitAll()
-                        .requestMatchers("homeprivacypolicy").permitAll()
+                        .requestMatchers("/", "/home", "/dashboard", "/homepage").permitAll()
+                        .requestMatchers("/register", "/login", "/logout").permitAll()
+                        .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll() // Adjusted for static resources
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form

@@ -1,0 +1,31 @@
+/* Global Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar */
+#sidebar-wrapper {
+    width: 250px;
+    transition: margin 0.3s;
+}
+.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+/* Cards */
+.card {
+    border-radius: 15px;
+}
+.card .fas {
+    opacity: 0.2;
+    transition: opacity 0.3s;
+}
+.card:hover .fas {
+    opacity: 1;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

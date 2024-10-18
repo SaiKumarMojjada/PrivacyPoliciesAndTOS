@@ -1,0 +1,67 @@
+/* Hero Section */
+.hero {
+    min-height: 80vh;
+    background: linear-gradient(to right, #0F4142, #F7F4E7);
+    color: white;
+}
+
+/* Navbar */
+.navbar-brand img {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar-nav .nav-link {
+    color: #F7F4E7 !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #D96123 !important;
+}
+
+/* Cards */
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-body i {
+    color: #D96123; /* Apply accent color to icons */
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #D96123;
+    border: none;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #B84E1C;
+}
+
+/* Accent Buttons */
+.btn-warning {
+    background-color: #D96123;
+    border: none;
+    color: white;
+}
+.btn-warning:hover {
+    background-color: #B84E1C;
+}
+
+/* Footer */
+footer {
+    background-color: #0F4142;
+    color: white;
+    padding: 20px 0;
+}
+
+/* Table Hover Effect */
+.table-hover tbody tr:hover {
+    background-color: rgba(15, 65, 66, 0.1);
+}
