@@ -1,0 +1,184 @@
+/* Global Styles */
+body {
+    background-color: #F7F4E7;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #0F4142;
+    transition: margin 0.3s;
+}
+/* Sidebar Heading */
+.sidebar-heading {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #F7F4E7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.toggled .sidebar {
+    margin-left: -250px;
+}
+.list-group {
+    flex-grow: 1; /* Ensures list takes up remaining space */
+    padding: 15px 0; /* Adds space between top and bottom items */
+}
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 15px 20px; /* Uniform padding for each item */
+    margin-bottom: 5px; /* Small margin between items */
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+.list-group-item a {
+    color: #F7F4E7;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+.list-group-item i {
+    margin-right: 10px;
+}
+/* Hover Effect */
+.list-group-item:hover {
+    background-color: #D96123;
+}
+
+
+/* Navbar */
+.navbar {
+    background-color: #0F4142;
+    color: #F7F4E7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.navbar .fa-bell, .navbar .fa-user-circle {
+    color: #F7F4E7;
+}
+
+/* Cards */
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+/*.card:hover {*/
+/*    transform: scale(1.05);*/
+/*    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);*/
+/*}*/
+.card-body i {
+    color: #D96123;
+}
+
+/* Table */
+.table-hover tbody tr:hover {
+    background-color: rgba(15, 65, 66, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #D96123;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #B84E1C;
+}
+
+/* Top Navbar */
+.top-navbar {
+    background-color: #F7F4E7; /* Background color */
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-navbar-container {
+    width: 100%;
+}
+
+/* Welcome Message */
+.welcome-message h5 {
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.welcome-subtext {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Profile Section */
+.navbar-profile {
+    gap: 10px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.profile-info strong {
+    font-size: 1rem;
+}
+
+/* Icons */
+.navbar-icon-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #0F4142;
+    color: #F7F4E7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navbar-icon-circle:hover {
+    background-color: #D96123;
+}
+
+/* Notification Badge */
+.notification-badge {
+    font-size: 10px;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+/* Container and Card */
+.website-card {
+    background-color: #F7F4E7;
+}
+/* Form Floating Inputs */
+.form-floating input {
+    border-radius: 30px;
+    padding: 15px 20px;
+}
+
+.form-floating label {
+    padding-left: 20px;
+}
+
+/* Submit Button */
+.btn-submit {
+    background-color: #D96123;
+    border: none;
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #B84E1C;
+}
+
+/* Form Validation */
+.invalid-feedback {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    color: #dc3545;
+}
