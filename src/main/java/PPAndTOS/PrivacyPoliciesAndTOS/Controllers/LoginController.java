@@ -38,7 +38,7 @@ public class LoginController {
     public String registerUser(@ModelAttribute("user") User user,
                                RedirectAttributes redirectAttributes) {
         try {
-//            userService.registerUser(user);
+            userService.registerUser(user);
             redirectAttributes.addFlashAttribute("success", "Registration successful! Please log in.");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "An error occurred during registration. Try again.");
