@@ -150,15 +150,15 @@
                             <th>Website</th>
                             <th>Change Detected</th>
                             <th>Date</th>
-                            <th>Status</th>
+<!--                            <th>Status</th>-->
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="website : ${websites}">
                             <td th:text="${website.url}">Website URL</td>
                             <td th:text="${website.policyChanged ? 'Yes' : 'No'}">Change Detected</td>
-                            <!--<td th:text="${#dates.format(website.lastChecked, 'yyyy-MM-dd')}">Date</td>
-                            <td>
+                            <td th:text="${#dates.format(website.lastChecked, 'yyyy-MM-dd')}">Date</td>
+                            <!--<td>
                                     <span th:classappend="${website.policyChanged ? 'bg-success' : 'bg-warning'} badge">
                                         <span th:text="${website.policyChanged ? 'Notified' : 'Pending'}">Status</span>
                                     </span>

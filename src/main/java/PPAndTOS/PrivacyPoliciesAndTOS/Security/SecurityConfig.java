@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")                      // Custom login page
                         .loginProcessingUrl("/signin")            // URL to submit the username and password
-                        .usernameParameter("userName")            // Parameter for username
+                        .usernameParameter("userEmail")            // Parameter for username
                         .passwordParameter("userPassword")
                         .defaultSuccessUrl("/dashboard", true)    // Redirect after successful login
                         .failureUrl("/login?error=true")          // Redirect after login failure

@@ -50,7 +50,8 @@ public class WebsiteEntity {
     private int alertCount;
 
     // Many-to-one relationship with User
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    Change the type from string to User here after alpha
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)*/
+    private String user;
 }

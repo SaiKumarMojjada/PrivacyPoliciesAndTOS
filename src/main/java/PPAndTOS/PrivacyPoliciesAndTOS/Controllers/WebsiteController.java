@@ -26,14 +26,14 @@ public class WebsiteController {
         return "addNewWebsite";
     }
 
-    /*@PostMapping("/addNewWebsite")
+    @PostMapping("/addNewWebsite")
     public String addWebsite(@ModelAttribute WebsiteEntity website) {
         // Fetch the logged-in user
-        User user = userRepository.findByUserEmail(user.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+      /*  User user = userRepository.findByUserEmail(user.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));*/
 
         // Set fields for the new website
-        website.setUser(user);
+        website.setUser("gmail.com");
         website.setCreatedAt(LocalDateTime.now());
         website.setUpdatedAt(LocalDateTime.now());
         website.setPolicyChanged(false);
@@ -46,6 +46,6 @@ public class WebsiteController {
 
         // Redirect to the dashboard
         return "redirect:/dashboard";
-    }*/
+    }
 }
 
