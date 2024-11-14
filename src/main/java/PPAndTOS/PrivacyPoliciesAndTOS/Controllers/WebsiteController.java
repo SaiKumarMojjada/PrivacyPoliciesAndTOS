@@ -4,6 +4,7 @@ import PPAndTOS.PrivacyPoliciesAndTOS.Model.User;
 import PPAndTOS.PrivacyPoliciesAndTOS.Model.WebsiteEntity;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.UserRepository;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.WebsiteRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,13 +28,10 @@ public class WebsiteController {
     }
 
     @PostMapping("/addNewWebsite")
-    public String addWebsite(@ModelAttribute WebsiteEntity website) {
+    public String addWebsite(@ModelAttribute WebsiteEntity website, HttpSession session) {
         // Fetch the logged-in user
-      /*  User user = userRepository.findByUserEmail(user.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));*/
-
-        // Set fields for the new website
-        website.setUser("gmail.com");
+        User sessionUser = (User) session.getAttribute("user");
+        website.setUser(sessionUser);
         website.setCreatedAt(LocalDateTime.now());
         website.setUpdatedAt(LocalDateTime.now());
         website.setPolicyChanged(false);
