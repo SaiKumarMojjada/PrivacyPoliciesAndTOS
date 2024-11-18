@@ -3,6 +3,8 @@ package PPAndTOS.PrivacyPoliciesAndTOS.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -20,5 +22,6 @@ public class User {
 
     @Column(name ="password")
     private String userPassword;
+
 
 }

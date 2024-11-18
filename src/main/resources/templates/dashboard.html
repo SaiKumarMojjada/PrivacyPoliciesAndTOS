@@ -150,19 +150,19 @@
                             <th>Website</th>
                             <th>Change Detected</th>
                             <th>Date</th>
-<!--                            <th>Status</th>-->
+                            <th>Last Checked Date</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="website : ${websites}">
-                            <td th:text="${website.url}">Website URL</td>
+                            <td>
+                                <a th:text="${website.websiteName}"
+                                   th:href="@{/dashboard/{websiteId}(websiteName=${website.id})}">
+                                </a>
+                            </td>
                             <td th:text="${website.policyChanged ? 'Yes' : 'No'}">Change Detected</td>
-                            <td th:text="${#dates.format(website.lastChecked, 'yyyy-MM-dd')}">Date</td>
-                            <!--<td>
-                                    <span th:classappend="${website.policyChanged ? 'bg-success' : 'bg-warning'} badge">
-                                        <span th:text="${website.policyChanged ? 'Notified' : 'Pending'}">Status</span>
-                                    </span>
-                            </td>-->
+                            <td th:text="${#temporals.format(website.lastChecked, 'yyyy-MM-dd')}">Date</td>
+                            <td th:text="${#temporals.format(T(java.time.LocalDateTime).now(), 'yyyy-MM-dd')}">Today's Date</td> <!-- New column -->
                         </tr>
                         </tbody>
                     </table>

@@ -1,13 +1,9 @@
 package PPAndTOS.PrivacyPoliciesAndTOS.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
-
 
 @Entity
 @Table(name = "websites")
@@ -25,8 +21,22 @@ public class WebsiteEntity {
 
     private String url;
 
+    private String privacypolicyURL;
+
+    @Column(name = "current_policy", columnDefinition = "TEXT")
+    private String currentPolicy;
+
+    @Column(name = "previous_policy", columnDefinition = "TEXT")
+    private String previousPolicy;
+
+    @Column(name = "policy_summary", columnDefinition = "TEXT")
+    private String policySummary;
+
     @Column(name = "policy_changed")
     private boolean policyChanged;
+
+    @Column(name = "is_updated")
+    private boolean isUpdated;
 
     @Column(name = "monitoring_enabled")
     private boolean monitoringEnabled;
@@ -49,9 +59,9 @@ public class WebsiteEntity {
     @Column(name = "alert_count")
     private int alertCount;
 
-    // Many-to-one relationship with User
-//    Change the type from string to User here after alpha
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude // Prevent circular reference
     private User user;
+
 }

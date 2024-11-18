@@ -4,6 +4,7 @@ import PPAndTOS.PrivacyPoliciesAndTOS.Model.User;
 import PPAndTOS.PrivacyPoliciesAndTOS.Model.WebsiteEntity;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.UserRepository;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.WebsiteRepository;
+import PPAndTOS.PrivacyPoliciesAndTOS.Service.WebsiteScrappingService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import java.time.LocalDateTime;
 @Controller
 public class WebsiteController {
 
+    @Autowired
+    private WebsiteScrappingService websiteScrappingService;
     @Autowired
     private WebsiteRepository websiteRepository;
 
@@ -39,6 +42,7 @@ public class WebsiteController {
         website.setAlertStatus("Pending");
         website.setAlertCount(0);
 
+        websiteScrappingService.scrapePrivacyPolicy(website);
         // Save the website entity to the database
         websiteRepository.save(website);
 
