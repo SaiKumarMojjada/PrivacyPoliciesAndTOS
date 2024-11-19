@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -48,6 +49,13 @@ public class DashBoardController {
         List<WebsiteEntity> websites = dashboardService.getAllWebsites();
         model.addAttribute("websites", websites);
         return "dashboard";
+    }
+
+    @GetMapping("/dashboard/{websiteId}")
+    public String showWebsiteDashboard(@PathVariable("websiteId") Long websiteId, Model model) {
+        WebsiteEntity website = dashboardService.getWebsiteById(websiteId);
+        model.addAttribute("website", website);
+        return "websiteDashboard";
     }
 
 

@@ -1,9 +1,17 @@
-/* Hero Section */
 .hero {
     min-height: 80vh;
-    background: linear-gradient(to right, #0F4142, #F7F4E7);
-    color: white;
+    background: #FFFFFF;
+    color: black;
+    display: flex;
+    align-items: center;
 }
+
+.hero img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
 
 /* Navbar */
 .navbar-brand img {
@@ -12,7 +20,7 @@
 }
 
 .navbar-nav .nav-link {
-    color: #F7F4E7 !important;
+    color: black !important;
 }
 
 .navbar-nav .nav-link:hover {

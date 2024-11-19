@@ -28,4 +28,9 @@ public class DashboardService {
     public List<WebsiteEntity> getAllWebsites() {
         return websiteRepository.findAll(); // Retrieve all websites from the database
     }
+
+    public WebsiteEntity getWebsiteById(Long id) {
+        return websiteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Website not found with ID: " + id));
+    }
 }

@@ -22,13 +22,23 @@
 
 
 <!-- Hero Section -->
-<section class="hero d-flex align-items-center" style="background-color: #0F4142; min-height: 80vh;">
-    <div class="container text-center text-white">
-        <h1 class="display-4 fw-bold">Get Alerts for Every Policy and ToS Update</h1>
-        <p class="lead">Stay ahead of every privacy change and never miss an important update again.</p>
-        <a href="/register" class="btn btn-lg mt-4" style="background-color: #D96123; color: white;">Get Started</a>
+<section class="hero d-flex align-items-center" style="min-height: 80vh;">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Left Content Section -->
+            <div class="col-lg-6 text-white text-center text-lg-start">
+                <h1 class="display-4 fw-bold" style="color: black;">Get Alerts for Every Policy and ToS Update</h1>
+                <p class="lead" style="color: black;">Stay ahead of every privacy change and never miss an important update again.</p>
+                <a href="/register" class="btn btn-lg mt-4" style="background-color: #D96123;">Get Started</a>
+            </div>
+            <!-- Right Image Section -->
+            <div class="col-lg-6 text-center">
+                <img th:src="@{/assets/images/herosection.png}" alt="Hero Image" class="img-fluid" style="max-height: 400px;">
+            </div>
+        </div>
     </div>
 </section>
+
 
 <!-- Features Section -->
 <section id="features" class="py-5" style="background-color: #F7F4E7;">
@@ -38,7 +48,7 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm" style="background-color: #FFFFFF;">
                     <div class="card-body text-center">
-                        <i class="fas fa-eye fa-3x mb-3" style="color: #D96123;"></i>
+                        <img th:src="@{/assets/images/realtimemonitoring.png}" alt="Real-Time Monitoring" class="img-fluid mb-3" style="max-height: 150px;">
                         <h5>Real-Time Monitoring</h5>
                         <p>Automatically track policy and ToS updates in real-time.</p>
                     </div>
@@ -47,7 +57,7 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm" style="background-color: #FFFFFF;">
                     <div class="card-body text-center">
-                        <i class="fas fa-bell fa-3x mb-3" style="color: #D96123;"></i>
+                        <img th:src="@{/assets/images/instantalerts.png}" alt="Instant Alerts" class="img-fluid mb-3" style="max-height: 150px;">
                         <h5>Instant Alerts</h5>
                         <p>Receive email notifications whenever policies change.</p>
                     </div>
@@ -56,7 +66,7 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm" style="background-color: #FFFFFF;">
                     <div class="card-body text-center">
-                        <i class="fas fa-history fa-3x mb-3" style="color: #D96123;"></i>
+                        <img th:src="@{/assets/images/changehistory.png}" alt="Change History" class="img-fluid mb-3" style="max-height: 150px;">
                         <h5>Change History</h5>
                         <p>Access the full history of all tracked policy changes.</p>
                     </div>
@@ -66,8 +76,9 @@
     </div>
 </section>
 
+
 <!-- How It Works Section -->
-<section id="how-it-works" class="py-5">
+<section id="how-it-works" class="py-5" style="background-color: #FFFFFF;">
     <div class="container text-center">
         <h2 class="mb-5" style="color: #0F4142;">How It Works</h2>
         <div class="row g-4">

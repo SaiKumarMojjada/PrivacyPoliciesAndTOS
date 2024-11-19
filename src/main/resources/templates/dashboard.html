@@ -156,9 +156,8 @@
                         <tbody>
                         <tr th:each="website : ${websites}">
                             <td>
-                                <a th:text="${website.websiteName}"
-                                   th:href="@{/dashboard/{websiteId}(websiteName=${website.id})}">
-                                </a>
+                                <a th:href="@{/dashboard/{websiteId}(websiteId=${website.id})}"
+                                   th:text="${website.websiteName}"></a>
                             </td>
                             <td th:text="${website.policyChanged ? 'Yes' : 'No'}">Change Detected</td>
                             <td th:text="${#temporals.format(website.lastChecked, 'yyyy-MM-dd')}">Date</td>
