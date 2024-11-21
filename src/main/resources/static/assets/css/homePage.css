@@ -76,7 +76,7 @@ footer {
 
 /* Footer Styles */
 .footer {
-    background-color: #0F4142;
+    background-color: black;
     color: #F7F4E7;
     padding: 40px 0;
 }
@@ -107,6 +107,6 @@ footer {
 }
 
 .footer-bottom {
-    background-color: #0D3334;
+    background-color:black;
     color: #F7F4E7;
 }

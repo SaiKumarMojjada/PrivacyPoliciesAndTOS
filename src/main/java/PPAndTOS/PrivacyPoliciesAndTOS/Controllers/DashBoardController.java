@@ -39,8 +39,6 @@ public class DashBoardController {
             }
         }
         Long userId = sessionUser.getId();
-//        List<WebsiteEntity> userWebsites = dashboardService.loginDashboard(userId);
-//        model.addAttribute("listOfValues",userWebsites);
         model.addAttribute("user",sessionUser);
         model.addAttribute("websiteCount", dashboardService.getMonitoredWebsiteCount());
         model.addAttribute("policyChangeCount", dashboardService.getPolicyChangeCount());

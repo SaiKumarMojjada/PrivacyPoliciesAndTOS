@@ -4,7 +4,8 @@ import PPAndTOS.PrivacyPoliciesAndTOS.Model.User;
 import PPAndTOS.PrivacyPoliciesAndTOS.Model.WebsiteEntity;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.UserRepository;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.WebsiteRepository;
-import PPAndTOS.PrivacyPoliciesAndTOS.Service.WebsiteScrappingService;
+import PPAndTOS.PrivacyPoliciesAndTOS.Service.EmailService;
+import PPAndTOS.PrivacyPoliciesAndTOS.Service.WebsiteScrappingServicePP;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +19,16 @@ import java.time.LocalDateTime;
 public class WebsiteController {
 
     @Autowired
-    private WebsiteScrappingService websiteScrappingService;
+    private WebsiteScrappingServicePP websiteScrappingService;
+
     @Autowired
     private WebsiteRepository websiteRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/addWebsite")
     public String addNewWebsite() {
@@ -32,7 +37,6 @@ public class WebsiteController {
 
     @PostMapping("/addNewWebsite")
     public String addWebsite(@ModelAttribute WebsiteEntity website, HttpSession session) {
-        // Fetch the logged-in user
         User sessionUser = (User) session.getAttribute("user");
         website.setUser(sessionUser);
         website.setCreatedAt(LocalDateTime.now());
@@ -43,10 +47,16 @@ public class WebsiteController {
         website.setAlertCount(0);
 
         websiteScrappingService.scrapePrivacyPolicy(website);
-        // Save the website entity to the database
         websiteRepository.save(website);
 
-        // Redirect to the dashboard
+        String subject = "New Website Added: " + website.getWebsiteName();
+        String body = "Hello,\n\nYou have successfully added a new website to your monitoring list:\n"
+                + "Website Name: " + website.getWebsiteName() + "\n"
+                + "Website URL: " + website.getUrl() + "\n\n"
+                + "Thank you for using our service.\n\nBest regards,\nPrivacy Policies and TOS Team";
+
+        emailService.sendEmail(sessionUser.getUserEmail(), subject, body);
+
         return "redirect:/dashboard";
     }
 }
