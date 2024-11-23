@@ -25,24 +25,31 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class WebsiteScrappingServicePP {
+public class WebsiteScrappingService {
 
     @Autowired
     private WebsiteRepository websiteRepository;
 
 
-    public String scrapePrivacyPolicy(WebsiteEntity website) {
+    public String scrapeTheContent(WebsiteEntity website, String linkToFind) {
         String url = website.getUrl();
-        String privacyUrl = findPrivacyPolicyUrl(url);
+        String linkUrl = findLinkUrl(url, linkToFind);
 
-        if (privacyUrl != null) {
-            website.setPrivacypolicyURL(privacyUrl);
-            String content = extractPrivacyPolicyContent(privacyUrl);
-
+        if (linkUrl != null) {
+            website.setPrivacypolicyURL(linkUrl);
+            String content = extractPrivacyPolicyContent(linkUrl);
+            String isSaved;
             if (content != null) {
-                updatePrivacyPolicyDetails(website, content);
-                log.info("Successfully scraped and saved privacy policy for URL: {}", url);
-                return content;
+                if(linkToFind == "privacy"){
+                    isSaved = updatePPDetails(website, content);
+                    log.info("Successfully scraped and saved privacy policy for URL: {}", url);
+                    return content;
+                }else{
+                    isSaved = updateTosDetails(website, content);
+                    log.info("Successfully scraped and saved tos for URL: {}", url);
+                    return content;
+                }
+
             }
         }
 
@@ -50,28 +57,45 @@ public class WebsiteScrappingServicePP {
         return null;
     }
 
-    public void updatePrivacyPolicyDetails(WebsiteEntity website, String currentPolicy) {
-        String previousPolicy = website.getCurrentPolicy();
-
-        website.setCurrentPolicy(currentPolicy);
-        website.setPreviousPolicy(previousPolicy);
-//        website.setUpdated(previousPolicy == null || !currentPolicy.equals(previousPolicy));
-        website.setLastChecked(LocalDateTime.now());
-        website.setUpdatedAt(LocalDateTime.now());
-        websiteRepository.save(website);
+    public String updatePPDetails(WebsiteEntity website, String currentPolicy) {
+        try{
+            String previousPolicy = website.getCurrentPolicy();
+            website.setCurrentPolicy(currentPolicy);
+            website.setPreviousPolicy(previousPolicy);
+            website.setLastChecked(LocalDateTime.now());
+            website.setUpdatedAt(LocalDateTime.now());
+            websiteRepository.save(website);
+            return "saved";
+        }catch (Exception e){
+            log.error("Error occurred while saving Privacy Policy data for website: {}", website.getWebsiteName(), e);
+            return "failed";
+        }
     }
 
-    private String findPrivacyPolicyUrl(String url) {
-        String link = findPrivacyPolicyUrlWithJsoup(url);
+    public String updateTosDetails(WebsiteEntity website, String currentPolicy) {
+        try {
+            String previousPolicy = website.getCurrentTos();
+            website.setCurrentTos(currentPolicy);
+            website.setPreviousTos(previousPolicy);
+            websiteRepository.save(website);
+            return "saved";
+        } catch (Exception e) {
+            log.error("Error occurred while saving Terms of Service data for website: {}", website.getWebsiteName(), e);
+            return "failed";
+        }
+    }
+
+    private String findLinkUrl(String url, String linkToFind) {
+        String link = findLinkUrlWithJsoup(url,linkToFind);
         if (link == null) {
-            link = findPrivacyPolicyUrlWithSelenium(url);
+            link = findLinkUrlWithSelenium(url, linkToFind);
         }
         return link;
     }
 
-    private String findPrivacyPolicyUrlWithJsoup(String url){
+    private String findLinkUrlWithJsoup(String url, String linkToFind) {
         try {
-            log.info("Finding privacy policy URL using Jsoup for: {}", url);
+            log.info("Finding Content Link URL using Jsoup for: {}", url);
             Connection.Response initialResponse = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
                     .method(Connection.Method.GET)
@@ -81,9 +105,19 @@ public class WebsiteScrappingServicePP {
             Elements links = homepage.select("footer a:matchesOwn((?i)privacy|privacy policy|privacy notice|privacy statement|data protection)");
 
             if (links.isEmpty()) {
-                List<String> orderedPrivacyTexts = Arrays.asList(
-                        "privacy", "privacy policy", "privacy notice", "privacy statement", "data protection"
-                );
+                List<String> orderedPrivacyTexts;
+                if(linkToFind != null && linkToFind == "privacy") {
+                    orderedPrivacyTexts = Arrays.asList(
+                            "privacy", "privacy policy", "privacy notice", "privacy statement", "data protection"
+                    );
+                }else{
+                    orderedPrivacyTexts = Arrays.asList(
+                            "terms of service","terms and conditions","terms", "user agreement",
+                            "service agreement","conditions of use","terms of use","legal terms",
+                            "legal agreement","acceptable use policy"
+                    );
+                }
+
 
                 for (String text : orderedPrivacyTexts) {
                     links = homepage.select(String.format("footer a:containsOwn(%s), div.footer a:containsOwn(%s)", text, text));
@@ -111,7 +145,7 @@ public class WebsiteScrappingServicePP {
         } catch (HttpStatusException e) {
             log.error("HTTP error fetching URL. Status={}, URL={}", e.getStatusCode(), url, e);
             if (e.getStatusCode() == 403) {
-                return findPrivacyPolicyUrlWithSelenium(url);
+                return findLinkUrlWithSelenium(url, linkToFind);
             }
         } catch (IOException e) {
             log.error("IOException occurred while fetching URL using Jsoup: {}", url, e);
@@ -119,11 +153,11 @@ public class WebsiteScrappingServicePP {
             log.error("Unexpected error occurred while fetching URL using Jsoup: {}", url, e);
         }
 
-        return findPrivacyPolicyUrlWithSelenium(url);
+        return findLinkUrlWithSelenium(url, linkToFind);
     }
 
 
-    private String findPrivacyPolicyUrlWithSelenium(String url) {
+    private String findLinkUrlWithSelenium(String url, String  linkToFind) {
         WebDriver webDriver = setupWebDriver();
 
         try {
@@ -143,10 +177,20 @@ public class WebsiteScrappingServicePP {
             }
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(20)); // Generous timeout
-            List<String> possibleTexts = Arrays.asList(
-                    "Privacy Policy", "Privacy Notice", "Privacy",
-                    "Privacy and Cookies", "Data Protection", "Privacy Statement"
-            );
+            List<String> possibleTexts;
+            if(linkToFind == "privacy") {
+                possibleTexts = Arrays.asList(
+                        "Privacy Policy", "Privacy Notice", "Privacy",
+                        "Privacy and Cookies", "Data Protection", "Privacy Statement"
+                );
+            }else{
+                possibleTexts = Arrays.asList(
+                        "terms of service","terms and conditions","terms", "user agreement",
+                        "service agreement","conditions of use","terms of use","legal terms",
+                        "legal agreement","acceptable use policy"
+                );
+            }
+
 
             for (String text : possibleTexts) {
                 try {
@@ -242,9 +286,6 @@ public class WebsiteScrappingServicePP {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-
-        // Automatically manage the ChromeDriver
-        io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
         return new ChromeDriver(options);
     }
 

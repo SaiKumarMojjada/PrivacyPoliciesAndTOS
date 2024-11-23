@@ -12,19 +12,44 @@
     border-radius: 10px; /* Optional: Add rounded corners */
 }
 
-
 /* Navbar */
-.navbar-brand img {
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.navbar-brand img {
+    width: auto;
+    height: 70px;
+    background-color: #ffffff;
+    padding: 2px;
+}
+
 
 .navbar-nav .nav-link {
     color: black !important;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #D96123 !important;
+    color: #af1740 !important;
 }
 
 /* Cards */
@@ -33,31 +58,34 @@
     background-color: #FFFFFF;
     border-radius: 10px;
 }
+
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card-body i {
-    color: #D96123; /* Apply accent color to icons */
+    color: #af1740;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #D96123;
+    background-color: #af1740;
     border: none;
     color: white;
 }
+
 .btn-primary:hover {
     background-color: #B84E1C;
 }
 
 /* Accent Buttons */
 .btn-warning {
-    background-color: #D96123;
+    background-color: #af1740;
     border: none;
     color: white;
 }
+
 .btn-warning:hover {
     background-color: #B84E1C;
 }
@@ -107,6 +135,6 @@ footer {
 }
 
 .footer-bottom {
-    background-color:black;
+    background-color: black;
     color: #F7F4E7;
 }

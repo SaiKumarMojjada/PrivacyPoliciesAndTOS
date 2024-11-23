@@ -52,15 +52,11 @@
     <!-- Top Bar -->
     <nav class="top-navbar shadow-sm">
       <div class="top-navbar-container d-flex align-items-center justify-content-between">
-        <!-- Left Section: Welcome Message -->
         <div class="welcome-message d-flex flex-column">
           <h5 class="mb-0">Welcome Back, <strong>User!</strong></h5>
           <span class="welcome-subtext">Exclusive Offers Await!</span>
         </div>
-
-        <!-- Right Section: Profile and Icons -->
         <div class="navbar-right d-flex align-items-center">
-          <!-- Icons Section -->
           <div class="navbar-icon-circle me-3">
             <i class="fas fa-bell position-relative">
               <span class="notification-badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">1</span>
@@ -80,50 +76,89 @@
     <div class="container-fluid px-4 py-5">
       <h2 class="mb-4" th:text="'Details for ' + ${website.websiteName}">Website Details</h2>
 
-      <!-- Policy Details Table -->
-      <div class="card shadow-sm">
-        <div class="card-header text-white bg-dark">Policy Details</div>
-        <div class="card-body">
-          <table class="table table-bordered align-middle">
-            <thead class="bg-light">
-            <tr>
-              <th style="width: 20%;">Policy Type</th>
-              <th>Content</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td><strong>Current Policy</strong></td>
-              <td th:text="${website.currentPolicy}">Current Policy Content</td>
-            </tr>
-            <tr>
-              <td><strong>Previous Policy</strong></td>
-              <td th:text="${website.previousPolicy}">Previous Policy Content</td>
-            </tr>
-            <tr>
-              <td><strong>Policy Summary</strong></td>
-              <td th:text="${website.policySummary}">Policy Summary Content</td>
-            </tr>
-            </tbody>
-          </table>
+      <!-- Tabs for Policies -->
+      <ul class="nav nav-tabs mb-4" id="policyTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="privacy-policy-tab" data-bs-toggle="tab" data-bs-target="#privacy-policy" type="button" role="tab" aria-controls="privacy-policy" aria-selected="true">
+            Privacy Policy
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="terms-of-service-tab" data-bs-toggle="tab" data-bs-target="#terms-of-service" type="button" role="tab" aria-controls="terms-of-service" aria-selected="false">
+            Terms of Service
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Content -->
+      <div class="tab-content" id="policyTabsContent">
+        <!-- Privacy Policy Section -->
+        <div class="tab-pane fade show active" id="privacy-policy" role="tabpanel" aria-labelledby="privacy-policy-tab">
+          <div class="card shadow-sm">
+            <div class="card-header text-white bg-dark">Privacy Policy</div>
+            <div class="card-body">
+              <table class="table table-bordered align-middle">
+                <thead class="bg-light">
+                <tr>
+                  <th style="width: 20%;">Policy Type</th>
+                  <th>Content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><strong>Current Policy</strong></td>
+                  <td th:text="${website.currentPolicy}">Current Policy Content</td>
+                </tr>
+                <tr>
+                  <td><strong>Previous Policy</strong></td>
+                  <td th:text="${website.previousPolicy}">Previous Policy Content</td>
+                </tr>
+                <tr>
+                  <td><strong>Policy Summary</strong></td>
+                  <td th:text="${website.policySummary}">Policy Summary Content</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terms of Service Section -->
+        <div class="tab-pane fade show active" id="privacy-polici" role="tabpanel" aria-labelledby="privacy-policy-tab">
+          <div class="card shadow-sm">
+            <div class="card-header text-white bg-dark">Privacy Policy</div>
+            <div class="card-body">
+              <table class="table table-bordered align-middle">
+                <thead class="bg-light">
+                <tr>
+                  <th style="width: 20%;">Policy Type</th>
+                  <th>Content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><strong>Current Policy</strong></td>
+                  <td th:text="${website.currentPolicy}">Current Policy Content</td>
+                </tr>
+                <tr>
+                  <td><strong>Previous Policy</strong></td>
+                  <td th:text="${website.previousPolicy}">Previous Policy Content</td>
+                </tr>
+                <tr>
+                  <td><strong>Policy Summary</strong></td>
+                  <td th:text="${website.policySummary}">Policy Summary Content</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-
+    </div>
   </div>
 </div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Sidebar Toggle Script -->
-<script>
-  const menuToggle = document.getElementById("menu-toggle");
-  const wrapper = document.getElementById("wrapper");
-
-  menuToggle.addEventListener("click", () => {
-    wrapper.classList.toggle("toggled");
-  });
-</script>
-
 </body>
 </html>

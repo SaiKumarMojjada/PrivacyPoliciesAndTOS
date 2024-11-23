@@ -35,6 +35,18 @@ public class WebsiteEntity {
     @Column(name = "policy_changed")
     private boolean policyChanged;
 
+    @Column(name = "current_tos", columnDefinition = "TEXT")
+    private String currentTos;
+
+    @Column(name = "previous_tos", columnDefinition = "TEXT")
+    private String previousTos;
+
+    @Column(name = "tos_summary", columnDefinition = "TEXT")
+    private String tosSummary;
+
+    @Column(name = "tos_changed")
+    private boolean tosChanged;
+
     @Column(name = "is_updated")
     private boolean isUpdated;
 

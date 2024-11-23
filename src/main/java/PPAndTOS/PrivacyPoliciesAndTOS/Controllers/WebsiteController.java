@@ -5,7 +5,7 @@ import PPAndTOS.PrivacyPoliciesAndTOS.Model.WebsiteEntity;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.UserRepository;
 import PPAndTOS.PrivacyPoliciesAndTOS.Repository.WebsiteRepository;
 import PPAndTOS.PrivacyPoliciesAndTOS.Service.EmailService;
-import PPAndTOS.PrivacyPoliciesAndTOS.Service.WebsiteScrappingServicePP;
+import PPAndTOS.PrivacyPoliciesAndTOS.Service.WebsiteScrappingService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class WebsiteController {
 
     @Autowired
-    private WebsiteScrappingServicePP websiteScrappingService;
+    private WebsiteScrappingService websiteScrappingService;
 
     @Autowired
     private WebsiteRepository websiteRepository;
@@ -46,7 +46,8 @@ public class WebsiteController {
         website.setAlertStatus("Pending");
         website.setAlertCount(0);
 
-        websiteScrappingService.scrapePrivacyPolicy(website);
+        websiteScrappingService.scrapeTheContent(website, "privacy");
+        websiteScrappingService.scrapeTheContent(website, "tos");
         websiteRepository.save(website);
 
         String subject = "New Website Added: " + website.getWebsiteName();
