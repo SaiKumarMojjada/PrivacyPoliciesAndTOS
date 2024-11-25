@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update User Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/dashboard.css}">
+</head>
+<body>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar-wrapper" class="sidebar">
+        <div class="sidebar-heading">
+            <h3>SecureGuard</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="list-group-item">
+                <a th:href="@{/addWebsite}"><i class="fas fa-plus-circle"></i> Add New Website</a>
+            </li>
+            <li class="list-group-item">
+                <a th:href="@{/updateUser/{id}(id=${user.id})}"><i class="fas fa-cogs"></i> Update User Details</a>
+            </li>
+            <li class="list-group-item">
+                <a href="/help"><i class="fas fa-question-circle"></i> Help</a>
+            </li>
+            <li class="list-group-item">
+                <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
+            </li>
+            <li class="list-group-item">
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="page-content-wrapper" class="w-100">
+        <!-- Top Bar -->
+        <nav class="top-navbar shadow-sm bg-white py-3">
+            <div class="container d-flex align-items-center justify-content-between">
+                <div class="welcome-message">
+                    <h5 class="mb-0">Welcome Back, <strong th:text="${user.userName}">User</strong>!</h5>
+                    <small class="text-muted">Your dashboard overview is ready.</small>
+                </div>
+                <div class="navbar-icons d-flex align-items-center">
+                    <div class="navbar-icon-circle me-3 position-relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">1</span>
+                    </div>
+                    <div class="navbar-icon-circle me-3">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button id="menu-toggle" class="btn btn-outline-primary">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Update User Details Form -->
+        <div class="container px-4 py-5">
+            <h2 class="mb-4">Update User Details</h2>
+            <form th:action="@{/updateUser}" th:object="${user}" method="post" class="mt-4">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="userName" name="userName" th:field="*{userName}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" th:field="*{userEmail}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="userPassword" name="userPassword" th:field="*{userPassword}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById("menu-toggle").addEventListener("click", () => {
+        document.getElementById("wrapper").classList.toggle("toggled");
+    });
+</script>
+</body>
+</html>

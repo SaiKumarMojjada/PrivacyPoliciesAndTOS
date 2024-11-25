@@ -16,13 +16,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/", "/home", "/dashboard", "/homepage").permitAll()
-                        .requestMatchers("/register", "/login", "/logout").permitAll()
+                        .requestMatchers("/", "/home", "/dashboard", "/homepage","/public/websites").permitAll()
+                        .requestMatchers("/register", "/login", "/logout","/").permitAll()
                         .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll() // Adjusted for static resources
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/login")                      // Custom login page
+                        .loginPage("/login")
                         .loginProcessingUrl("/signin")            // URL to submit the username and password
                         .usernameParameter("userEmail")            // Parameter for username
                         .passwordParameter("userPassword")

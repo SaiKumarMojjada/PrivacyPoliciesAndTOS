@@ -23,6 +23,8 @@ public class WebsiteEntity {
 
     private String privacypolicyURL;
 
+    private String tosURL;
+
     @Column(name = "current_policy", columnDefinition = "TEXT")
     private String currentPolicy;
 
@@ -45,7 +47,7 @@ public class WebsiteEntity {
     private String tosSummary;
 
     @Column(name = "tos_changed")
-    private boolean tosChanged;
+    private Boolean tosChanged;
 
     @Column(name = "is_updated")
     private boolean isUpdated;

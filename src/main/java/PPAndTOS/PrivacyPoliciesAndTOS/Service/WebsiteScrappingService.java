@@ -36,7 +36,11 @@ public class WebsiteScrappingService {
         String linkUrl = findLinkUrl(url, linkToFind);
 
         if (linkUrl != null) {
-            website.setPrivacypolicyURL(linkUrl);
+            if(linkToFind=="privacy"){
+                website.setPrivacypolicyURL(linkUrl);
+            }else{
+                website.setTosURL(linkUrl);
+            }
             String content = extractPrivacyPolicyContent(linkUrl);
             String isSaved;
             if (content != null) {
@@ -108,7 +112,7 @@ public class WebsiteScrappingService {
                 List<String> orderedPrivacyTexts;
                 if(linkToFind != null && linkToFind == "privacy") {
                     orderedPrivacyTexts = Arrays.asList(
-                            "privacy", "privacy policy", "privacy notice", "privacy statement", "data protection"
+                            "privacy policy", "privacy",  "privacy notice", "privacy statement", "data protection"
                     );
                 }else{
                     orderedPrivacyTexts = Arrays.asList(

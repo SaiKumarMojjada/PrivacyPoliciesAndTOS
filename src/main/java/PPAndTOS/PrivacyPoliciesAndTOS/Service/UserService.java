@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -22,5 +23,13 @@ public class UserService {
         // Encrypt the password before saving
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         return userRepository.save(user);
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }
