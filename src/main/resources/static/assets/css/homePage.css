@@ -49,7 +49,7 @@
 }
 
 .navbar-nav .nav-link:hover {
-    color: #af1740 !important;
+    color: #bc1823 !important;
 }
 
 /* Cards */
@@ -65,12 +65,12 @@
 }
 
 .card-body i {
-    color: #af1740;
+    color: #bc1823;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #af1740;
+    background-color: #bc1823;
     border: none;
     color: white;
 }
@@ -81,13 +81,13 @@
 
 /* Accent Buttons */
 .btn-warning {
-    background-color: #af1740;
+    background-color: #bc1823;
     border: none;
     color: white;
 }
 
 .btn-warning:hover {
-    background-color: #B84E1C;
+    background-color: #bc1823;
 }
 
 /* Footer */
@@ -110,7 +110,7 @@ footer {
 }
 
 .footer h5 {
-    color: #D96123;
+    color: #bc1823;
     margin-bottom: 15px;
     font-weight: 600;
 }
@@ -121,7 +121,7 @@ footer {
 }
 
 .footer-link:hover {
-    color: #D96123;
+    color: #bc1823;
     text-decoration: underline;
 }
 
