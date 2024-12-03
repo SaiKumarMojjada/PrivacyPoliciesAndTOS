@@ -17,4 +17,29 @@ public class WebsiteService {
     public List<WebsiteEntity> getAllWebsites() {
         return websiteRepository.findAll();
     }
+
+    // Find website by ID
+    public WebsiteEntity findById(Long id) {
+        return websiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Website not found with id: " + id));
+    }
+
+    // Update website details
+    public void updateWebsite(Long id, WebsiteEntity updatedWebsite) {
+        WebsiteEntity existingWebsite = findById(id); // Retrieve existing record
+        existingWebsite.setWebsiteName(updatedWebsite.getWebsiteName());
+        existingWebsite.setUrl(updatedWebsite.getUrl());
+        existingWebsite.setPrivacypolicyURL(updatedWebsite.getPrivacypolicyURL());
+        existingWebsite.setTosURL(updatedWebsite.getTosURL());
+        existingWebsite.setPolicySummary(updatedWebsite.getPolicySummary());
+        existingWebsite.setTosSummary(updatedWebsite.getTosSummary());
+        existingWebsite.setMonitoringEnabled(updatedWebsite.isMonitoringEnabled());
+        existingWebsite.setLastUpdatedBy(updatedWebsite.getLastUpdatedBy());
+        websiteRepository.save(existingWebsite); // Save updated entity
+    }
+
+    // Delete website by ID
+    public void deleteById(Long id) {
+        websiteRepository.deleteById(id); // Use repository's deleteById method
+    }
 }

@@ -84,10 +84,10 @@
                     <td th:text="${#temporals.format(website.lastChecked, 'yyyy-MM-dd')}"></td>
                     <td th:text="${#temporals.format(T(java.time.LocalDateTime).now(), 'yyyy-MM-dd')}"></td>
                     <td>
-                        <a th:href="@{/editWebsite/{websiteId}(websiteId=${website.id})}" class="text-primary me-2" title="Edit">
+                        <a th:href="@{/websites/editWebsite/{websiteId}(websiteId=${website.id})}" class="text-primary me-2" title="Edit">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a th:href="@{/deleteWebsite/{websiteId}(websiteId=${website.id})}" class="text-danger" title="Delete">
+                        <a th:href="@{/websites/deleteWebsite/{websiteId}(websiteId=${website.id})}" class="text-danger" title="Delete">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </td>

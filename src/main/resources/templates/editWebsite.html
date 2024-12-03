@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Edit Website</h2>
+    <form th:action="@{/websites/update/{id}(id=${website.id})}" th:object="${website}" method="post">
+        <div class="mb-3">
+            <label for="websiteName" class="form-label">Website Name</label>
+            <input type="text" id="websiteName" th:field="*{websiteName}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="url" class="form-label">Website URL</label>
+            <input type="text" id="url" th:field="*{url}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="privacypolicyURL" class="form-label">Privacy Policy URL</label>
+            <input type="text" id="privacypolicyURL" th:field="*{privacypolicyURL}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="tosURL" class="form-label">Terms of Service URL</label>
+            <input type="text" id="tosURL" th:field="*{tosURL}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

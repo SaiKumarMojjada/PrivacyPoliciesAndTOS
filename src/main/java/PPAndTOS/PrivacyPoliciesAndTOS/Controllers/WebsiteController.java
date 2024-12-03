@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
@@ -78,6 +79,27 @@ public class WebsiteController {
 
         emailService.sendEmail(sessionUser.getUserEmail(), subject, body);
 
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/websites/editWebsite/{id}")
+    public String editWebsite(@PathVariable Long id, Model model) {
+        WebsiteEntity website = websiteService.findById(id);
+        model.addAttribute("website", website);
+        return "editWebsite";
+    }
+
+    // Handle website update
+    @PostMapping("/websites/update/{id}")
+    public String updateWebsite(@PathVariable Long id, @ModelAttribute("website") WebsiteEntity website) {
+        websiteService.updateWebsite(id, website);
+        return "redirect:/dashboard";
+    }
+
+    // Handle website deletion
+    @GetMapping("/websites/deleteWebsite/{id}")
+    public String deleteWebsite(@PathVariable Long id) {
+        websiteService.deleteById(id);
         return "redirect:/dashboard";
     }
 }
